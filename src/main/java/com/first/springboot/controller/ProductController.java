@@ -1,6 +1,7 @@
 package com.first.springboot.controller;
 
 import com.first.springboot.helpers.ModelTransporter;
+import com.first.springboot.helpers.RegisteredTransporter;
 import com.first.springboot.model.Product;
 import com.first.springboot.model.Registered;
 import com.first.springboot.service.ProductService;
@@ -31,12 +32,14 @@ public class ProductController {
     @RequestMapping(path = "/processProductForm", method = RequestMethod.POST)
     public String processProductForm(@ModelAttribute Product product) {
         System.out.println(product);
+        product.setRegistered(RegisteredTransporter.getRegistered());
         this.productService.addProduct(product);
         return "redirect:/add-product";
     }
 
     @RequestMapping("/all-products")
     public String allProducts(Model model) {
+        //product.setRegistered(RegisteredTransporter.getRegistered());
         model.addAttribute("productList", this.productService.allProducts());
         model.addAttribute("title", "All Products");
         return "show_products";

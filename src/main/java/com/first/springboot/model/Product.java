@@ -6,23 +6,30 @@ import jakarta.persistence.*;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "product_id")
     private int id;
     private String name;
     @Column(length = 500)
     private String description;
     private long price;
 
-    public Product(int id, String name, String description, long price) {
+    @ManyToOne
+    private Registered registered;
+
+    public Registered getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(Registered registered) {
+        this.registered = registered;
+    }
+
+    public Product(int id, String name, String description, long price, Registered registered) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
-    }
-
-    public Product(String name, String description, long price) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
+        this.registered = registered;
     }
 
     public Product() {
@@ -68,6 +75,7 @@ public class Product {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
+                ", registered=" + registered +
                 '}';
     }
 }

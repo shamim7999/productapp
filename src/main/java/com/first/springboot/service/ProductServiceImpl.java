@@ -1,6 +1,7 @@
 package com.first.springboot.service;
 
 import com.first.springboot.dao.ProductRepository;
+import com.first.springboot.helpers.RegisteredTransporter;
 import com.first.springboot.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public List<Product> allProducts() {
-        return this.productRepository.allProducts();
+        return this.productRepository.allProducts(RegisteredTransporter.getRegistered().getId());
     }
 
     @Override

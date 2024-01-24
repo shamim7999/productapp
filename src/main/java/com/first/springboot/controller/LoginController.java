@@ -2,6 +2,7 @@ package com.first.springboot.controller;
 
 import com.first.springboot.dao.RegisterRepository;
 import com.first.springboot.helpers.ModelTransporter;
+import com.first.springboot.helpers.RegisteredTransporter;
 import com.first.springboot.model.Registered;
 import com.first.springboot.service.ProductService;
 import com.first.springboot.service.RegisterService;
@@ -34,17 +35,25 @@ public class LoginController {
     @RequestMapping(path = "/loginHandler", method = RequestMethod.POST)
     public String loginHandler(@RequestParam("userName") String userName,
                                @RequestParam("userPassword") String userPassword, Model model, HttpServletRequest req) {
-        List<Registered> registeredList = this.registerService.findRegisteredUsers(userName, userPassword);
-        if(registeredList.isEmpty()) {
-            return "register";
+        try {
+            List<Registered> registeredList = this.registerService.findRegisteredUsers(userName, userPassword);
+            if(registeredList.isEmpty()) {
+                return "register";
+            }
+
+            HttpSession session = req.getSession();
+            session.setAttribute("userName", userName);
+
+            //System.out.println(userName);
+            model.addAttribute("userName", userName);
+            ModelTransporter.setModel(model);
+
+            RegisteredTransporter.registeredList = registeredList;
+            //System.out.println("Size: "+registeredList.size());
+            //System.out.println("Registered: "+RegisteredTransporter.getRegistered().getId());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        HttpSession session = req.getSession();
-        session.setAttribute("userName", userName);
-
-        System.out.println(userName);
-        model.addAttribute("userName", userName);
-        ModelTransporter.setModel(model);
         return "home";
     }
 
@@ -54,6 +63,7 @@ public class LoginController {
         HttpSession session = request.getSession();
         session.removeAttribute("userName");
         session.invalidate(); // --->  Will remove all data.
+        RegisteredTransporter.registeredList.removeFirst();
         return "login";
     }
 

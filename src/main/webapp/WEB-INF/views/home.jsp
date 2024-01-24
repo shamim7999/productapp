@@ -2,6 +2,18 @@
 <html lang="en">
 <head>
     <%@ include file="all_css_js.jsp"%>
+
+    <style>
+        body {
+            width: 100%;
+            height: 93vh;
+            background-image: url(./image/linux.jpg);
+            background-size: cover;
+            color: white;
+            font-family: sans-serif;
+        }
+    </style>
+
 </head>
 <body>
 <%@ include file="validate.jsp" %>

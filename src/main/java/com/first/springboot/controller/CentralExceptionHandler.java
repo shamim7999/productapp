@@ -12,13 +12,13 @@ public class CentralExceptionHandler {
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler({Exception.class})
     public String exceptionHandler1(Model model) {
-        model.addAttribute("msg", "Mara Khao");
+        model.addAttribute("msg", "Please Return to Home Page");
         return "null_page";
     }
 
     @ExceptionHandler({IndexOutOfBoundsException.class})
     public String exceptionHandler2(Model model) {
-        model.addAttribute("msg", "Mara Khao");
+        model.addAttribute("msg", "Please Return to Home Page");
         return "null_page";
     }
 

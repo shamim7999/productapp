@@ -3,10 +3,14 @@ package com.first.springboot.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Registered {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "registered_id")
     private int id;
 
     @Column(length = 20)
@@ -18,20 +22,26 @@ public class Registered {
     @Column(length = 20)
     private String userConfirmPassword;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "registered")
+    private List<Product> products = new ArrayList<>();
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
+
     public Registered() {
     }
 
-    public Registered(int id, String userName, String userPassword, String userConfirmPassword) {
+    public Registered(int id, String userName, String userPassword, String userConfirmPassword, List<Product> products) {
         this.id = id;
         this.userName = userName;
         this.userPassword = userPassword;
         this.userConfirmPassword = userConfirmPassword;
-    }
-
-    public Registered(String userName, String userPassword, String userConfirmPassword) {
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userConfirmPassword = userConfirmPassword;
+        this.products = products;
     }
 
     public int getId() {
@@ -73,6 +83,8 @@ public class Registered {
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userConfirmPassword='" + userConfirmPassword + '\'' +
+                ", products=" + products +
                 '}';
     }
 }
+
