@@ -12,6 +12,7 @@
 </head>
 <body>
 <%@ include file="validate.jsp" %>
+<%@ include file="navbar.jsp"%>
 <h1>This is Product CRUD App</h1>
 <div class="container mt-3">
     <div class="row">

@@ -10,5 +10,4 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
 
     @Query(value = "SELECT * FROM product p WHERE p.registered_registered_id=:v", nativeQuery = true)
     public List<Product> allProducts(@Param("v") int registered_id);
-
 }

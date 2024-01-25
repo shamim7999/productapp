@@ -13,6 +13,7 @@
 </head>
     <body>
     <%@ include file="validate.jsp" %>
+    <%@ include file="navbar.jsp"%>
         Welcome home, ${personName}
     </body>
 </html>

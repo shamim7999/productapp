@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
+<%@ include file="all_css_js.jsp"%>
+<%@ include file="navbar.jsp"%>
     <%
         String s1 = application.getContextPath();
         response.sendRedirect("/"+s1+"/login");

@@ -12,6 +12,7 @@
 </head>
 <body>
 <%@ include file="validate.jsp" %>
+<%@ include file="navbar.jsp"%>
     <div class="container mt-3">
         <div class="row">
             <div class="col-md-12">
